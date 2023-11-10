@@ -10,6 +10,30 @@ spring:
 
 
 
+#设置项目mapper目录（dao包路径）的日志级别为DEBUG
+
+#logging:
+#
+#  level:
+#
+#    com:
+#
+#      xxx:
+#
+#        xxx
+#
+#        xxx: DEBUG
+
 mybatis-plus:
-  configuration:
-    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+
+  # mapper文件地址
+  mapper-locations: classpath*:com/backup/mysqlbackup/mapper/**/*.xml
+  #不想打印 SQL 日志
+  #configuration:
+  #   log-impl: org.apache.ibatis.logging.nologging.NoLoggingImpl
+  global-config:
+    db-config:
+      #设置被删除逻辑字段，1标识删除，0标识未删除
+      logic-delete-field: status
+      logic-delete-value: 1
+      logic-not-delete-value: 0
