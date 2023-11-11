@@ -1,24 +1,24 @@
-package com.hdd.winterSolsticeBolg.entity;
+package com.hdd.winterSolsticeBlog.entity;
 
 import com.baomidou.mybatisplus.annotation.IdType;
-import com.baomidou.mybatisplus.annotation.Version;
 import com.baomidou.mybatisplus.annotation.TableId;
-import java.time.LocalDateTime;
-import java.io.Serializable;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
+import java.io.Serializable;
+import java.time.LocalDateTime;
+
 /**
  * <p>
- * 
+ *
  * </p>
  *
  * @author haodedong
- * @since 2023-11-10
+ * @since 2023-11-11
  */
 @Data
 @EqualsAndHashCode(callSuper = false)
-public class Comments implements Serializable {
+public class Articles implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
@@ -26,24 +26,29 @@ public class Comments implements Serializable {
     private Integer id;
 
     /**
+     * 标题
+     */
+    private String title;
+
+    /**
      * 内容
      */
     private String content;
 
     /**
-     * 文章ID
+     * 分类
      */
-    private Integer article_id;
+    private String category;
 
     /**
-     * 用户ID
+     * 作者ID
      */
-    private Integer user_id;
+    private Integer authorId;
 
     /**
      * 创建时间
      */
-    private LocalDateTime created_at;
+    private LocalDateTime createdAt;
 
 
 }

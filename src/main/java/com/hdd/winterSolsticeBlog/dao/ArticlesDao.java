@@ -1,15 +1,15 @@
-package com.hdd.winterSolsticeBolg.dao;
+package com.hdd.winterSolsticeBlog.dao;
 
-import com.hdd.winterSolsticeBolg.entity.Articles;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import com.hdd.winterSolsticeBlog.entity.Articles;
 
 /**
  * <p>
- *  Mapper 接口
+ * Mapper 接口
  * </p>
  *
  * @author haodedong
- * @since 2023-11-10
+ * @since 2023-11-11
  */
 public interface ArticlesDao extends BaseMapper<Articles> {
 

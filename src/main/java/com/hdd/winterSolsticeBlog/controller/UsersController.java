@@ -1,8 +1,7 @@
-package com.hdd.winterSolsticeBolg.controller;
+package com.hdd.winterSolsticeBlog.controller;
 
 
 import org.springframework.web.bind.annotation.RequestMapping;
-
 import org.springframework.web.bind.annotation.RestController;
 
 /**
@@ -11,11 +10,11 @@ import org.springframework.web.bind.annotation.RestController;
  * </p>
  *
  * @author haodedong
- * @since 2023-11-10
+ * @since 2023-11-11
  */
 @RestController
-@RequestMapping("/comments")
-public class CommentsController {
+@RequestMapping("/users")
+public class UsersController {
 
 }
 

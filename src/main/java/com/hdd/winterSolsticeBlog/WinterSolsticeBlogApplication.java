@@ -1,4 +1,4 @@
-package com.hdd.winterSolsticeBolg;
+package com.hdd.winterSolsticeBlog;
 
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;

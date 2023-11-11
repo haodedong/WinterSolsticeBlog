@@ -1,4 +1,4 @@
-package com.hdd.winterSolsticeBolg;
+package com.hdd.winterSolsticeBlog;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;

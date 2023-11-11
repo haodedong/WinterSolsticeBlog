@@ -1,9 +1,9 @@
-package com.hdd.winterSolsticeBolg.service.impl;
+package com.hdd.winterSolsticeBlog.service.impl;
 
-import com.hdd.winterSolsticeBolg.entity.Articles;
-import com.hdd.winterSolsticeBolg.dao.ArticlesDao;
-import com.hdd.winterSolsticeBolg.service.IArticlesService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.hdd.winterSolsticeBlog.dao.ArticlesDao;
+import com.hdd.winterSolsticeBlog.entity.Articles;
+import com.hdd.winterSolsticeBlog.service.IArticlesService;
 import org.springframework.stereotype.Service;
 
 /**
@@ -12,7 +12,7 @@ import org.springframework.stereotype.Service;
  * </p>
  *
  * @author haodedong
- * @since 2023-11-10
+ * @since 2023-11-11
  */
 @Service
 public class ArticlesServiceImpl extends ServiceImpl<ArticlesDao, Articles> implements IArticlesService {

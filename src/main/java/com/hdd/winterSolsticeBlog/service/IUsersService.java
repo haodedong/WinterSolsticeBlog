@@ -1,7 +1,7 @@
-package com.hdd.winterSolsticeBolg.service;
+package com.hdd.winterSolsticeBlog.service;
 
-import com.hdd.winterSolsticeBolg.entity.Users;
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.hdd.winterSolsticeBlog.entity.Users;
 
 /**
  * <p>
@@ -9,7 +9,7 @@ import com.baomidou.mybatisplus.extension.service.IService;
  * </p>
  *
  * @author haodedong
- * @since 2023-11-10
+ * @since 2023-11-11
  */
 public interface IUsersService extends IService<Users> {
 

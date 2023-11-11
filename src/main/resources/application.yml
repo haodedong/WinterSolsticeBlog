@@ -8,26 +8,9 @@ spring:
     username: root
     password: IsuffUd89
 
-
-
-#设置项目mapper目录（dao包路径）的日志级别为DEBUG
-
-#logging:
-#
-#  level:
-#
-#    com:
-#
-#      xxx:
-#
-#        xxx
-#
-#        xxx: DEBUG
-
 mybatis-plus:
-
   # mapper文件地址
-  mapper-locations: classpath*:com/backup/mysqlbackup/mapper/**/*.xml
+  mapper-locations: classpath*:com/hdd/winterSolsticeBlog/mapper/**/*.xml
   #不想打印 SQL 日志
   #configuration:
   #   log-impl: org.apache.ibatis.logging.nologging.NoLoggingImpl

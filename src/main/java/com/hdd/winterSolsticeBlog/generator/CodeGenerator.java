@@ -1,4 +1,4 @@
-package com.hdd.winterSolsticeBolg.generator;
+package com.hdd.winterSolsticeBlog.generator;
 
 
 import com.baomidou.mybatisplus.annotation.IdType;
@@ -7,6 +7,7 @@ import com.baomidou.mybatisplus.generator.config.DataSourceConfig;
 import com.baomidou.mybatisplus.generator.config.GlobalConfig;
 import com.baomidou.mybatisplus.generator.config.PackageConfig;
 import com.baomidou.mybatisplus.generator.config.StrategyConfig;
+import com.baomidou.mybatisplus.generator.config.rules.NamingStrategy;
 
 /**
  * describe :
@@ -37,7 +38,7 @@ public class CodeGenerator {
 
         //设置包名
         PackageConfig packageConfig = new PackageConfig();
-        packageConfig.setParent("com.hdd.winterSolsticeBolg"); //设置生成的包名，与代码所在位置不冲突，二者叠加组成完整路径
+        packageConfig.setParent("com.hdd.winterSolsticeBlog"); //设置生成的包名，与代码所在位置不冲突，二者叠加组成完整路径
         packageConfig.setEntity("entity"); //设置实体类包名
         packageConfig.setMapper("dao"); //设置数据访问层包名
         autoGenerator.setPackageInfo(packageConfig);
@@ -50,6 +51,8 @@ public class CodeGenerator {
         strategyConfig.setEntityLombokModel(true); //设置实体类是否使用Lombok
         strategyConfig.setVersionFieldName("version"); //设置乐观锁字段名
         strategyConfig.setLogicDeleteFieldName("deleted"); //设置逻辑删除字段名
+        // 设置表名、字段名的命名策略
+        strategyConfig.setColumnNaming(NamingStrategy.underline_to_camel);
         autoGenerator.setStrategy(strategyConfig);
 
         autoGenerator.execute(); //执行生成操作
