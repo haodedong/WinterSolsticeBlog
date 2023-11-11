@@ -1,7 +1,7 @@
 package com.hdd.winterSolsticeBlog.service;
 
+import com.hdd.winterSolsticeBlog.entity.Article;
 import com.baomidou.mybatisplus.extension.service.IService;
-import com.hdd.winterSolsticeBlog.entity.Articles;
 
 /**
  * <p>
@@ -11,6 +11,6 @@ import com.hdd.winterSolsticeBlog.entity.Articles;
  * @author haodedong
  * @since 2023-11-11
  */
-public interface IArticlesService extends IService<Articles> {
+public interface ArticleService extends IService<Article> {
 
 }

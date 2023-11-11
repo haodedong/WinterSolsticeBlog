@@ -1,7 +1,7 @@
 package com.hdd.winterSolsticeBlog.service;
 
+import com.hdd.winterSolsticeBlog.entity.Comment;
 import com.baomidou.mybatisplus.extension.service.IService;
-import com.hdd.winterSolsticeBlog.entity.Comments;
 
 /**
  * <p>
@@ -11,6 +11,6 @@ import com.hdd.winterSolsticeBlog.entity.Comments;
  * @author haodedong
  * @since 2023-11-11
  */
-public interface ICommentsService extends IService<Comments> {
+public interface CommentService extends IService<Comment> {
 
 }

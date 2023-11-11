@@ -8,15 +8,22 @@ spring:
     username: root
     password: IsuffUd89
 
-mybatis-plus:
-  # mapper文件地址
-  mapper-locations: classpath*:com/hdd/winterSolsticeBlog/mapper/**/*.xml
-  #不想打印 SQL 日志
-  #configuration:
-  #   log-impl: org.apache.ibatis.logging.nologging.NoLoggingImpl
-  global-config:
-    db-config:
-      #设置被删除逻辑字段，1标识删除，0标识未删除
-      logic-delete-field: status
-      logic-delete-value: 1
-      logic-not-delete-value: 0
+## fix:knife4j文档页面，报404
+  mvc:
+    static-path-pattern: /static/**
+
+
+#mybatis-plus:
+#  # mapper文件地址
+#  mapper-locations: classpath*:com/hdd/winterSolsticeBlog/mapper/**/*.xml
+#  #不想打印 SQL 日志
+#  #configuration:
+#  #   log-impl: org.apache.ibatis.logging.nologging.NoLoggingImpl
+#  global-config:
+#    db-config:
+#      #设置被删除逻辑字段，1标识删除，0标识未删除
+#      logic-delete-field: status
+#      logic-delete-value: 1
+#      logic-not-delete-value: 0
+
+#debug: true

@@ -1,6 +1,5 @@
 package com.hdd.winterSolsticeBlog.controller;
 
-
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -13,8 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
  * @since 2023-11-11
  */
 @RestController
-@RequestMapping("/users")
-public class UsersController {
+@RequestMapping("/user")
+public class UserController {
 
 }
-
