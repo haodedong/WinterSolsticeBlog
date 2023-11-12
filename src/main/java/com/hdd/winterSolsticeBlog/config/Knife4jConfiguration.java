@@ -19,11 +19,11 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2WebMvc;
 @Configuration
 @EnableSwagger2WebMvc
 @EnableWebMvc
-public class Knife4jConfiguration  implements WebMvcConfigurer {
+public class Knife4jConfiguration implements WebMvcConfigurer {
 
     @Bean(value = "defaultApi2")
     public Docket defaultApi2() {
-        Docket docket=new Docket(DocumentationType.SWAGGER_2)
+        Docket docket = new Docket(DocumentationType.SWAGGER_2)
                 .apiInfo(new ApiInfoBuilder()
                         .title("冬至博客 RESTful APIs")
                         .description("#冬至博客 RESTful APIs")
@@ -32,7 +32,7 @@ public class Knife4jConfiguration  implements WebMvcConfigurer {
                         .version("1.0")
                         .build())
                 //分组名称
-                .groupName("2.X版本")
+                .groupName("0.1版本")
                 .select()
                 //这里指定Controller扫描包路径
                 .apis(RequestHandlerSelectors.basePackage("com.hdd.winterSolsticeBlog.controller"))
@@ -43,6 +43,7 @@ public class Knife4jConfiguration  implements WebMvcConfigurer {
 
     /**
      * fix knife4j文档页面，报404
+     *
      * @param registry
      */
     @Override

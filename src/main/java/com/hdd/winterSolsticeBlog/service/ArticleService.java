@@ -1,14 +1,14 @@
 package com.hdd.winterSolsticeBlog.service;
 
+import com.baomidou.mybatisplus.extension.service.IService;
 import com.hdd.winterSolsticeBlog.common.vo.ResponsePage;
 import com.hdd.winterSolsticeBlog.dto.ArticleDTO;
 import com.hdd.winterSolsticeBlog.dto.request.GetArticlePageListRequest;
 import com.hdd.winterSolsticeBlog.entity.Article;
-import com.baomidou.mybatisplus.extension.service.IService;
 
 /**
  * <p>
- *  服务类
+ * 服务类
  * </p>
  *
  * @author haodedong
@@ -17,4 +17,6 @@ import com.baomidou.mybatisplus.extension.service.IService;
 public interface ArticleService extends IService<Article> {
 
     ResponsePage<ArticleDTO> getArticlePageList(GetArticlePageListRequest request);
+
+    ArticleDTO getArticleById(Integer id);
 }

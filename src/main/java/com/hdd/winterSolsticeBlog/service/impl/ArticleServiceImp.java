@@ -13,6 +13,8 @@ import com.hdd.winterSolsticeBlog.mapper.ArticleMapper;
 import com.hdd.winterSolsticeBlog.mapper.CategoryMapper;
 import com.hdd.winterSolsticeBlog.mapper.TagMapper;
 import com.hdd.winterSolsticeBlog.service.ArticleService;
+import org.apache.commons.collections4.CollectionUtils;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -20,7 +22,7 @@ import java.util.List;
 
 /**
  * <p>
- *  服务实现类
+ * 服务实现类
  * </p>
  *
  * @author haodedong
@@ -37,10 +39,9 @@ public class ArticleServiceImp extends ServiceImpl<ArticleMapper, Article> imple
 
     @Autowired
     private TagMapper tagMapper;
+
     @Override
     public ResponsePage<ArticleDTO> getArticlePageList(GetArticlePageListRequest request) {
-        Category category = categoryMapper.selectById(1);
-        List<Tag> tags = tagMapper.selectTagsByArticleId(1);
         PageHelper.startPage(request.getPageNo(), request.getPageSize());
         List<ArticleDTO> articleList = articleMapper.selectArticleList(request.getKeyword(),
                 request.getCategoryId(),
@@ -54,6 +55,26 @@ public class ArticleServiceImp extends ServiceImpl<ArticleMapper, Article> imple
         responsePage.setData(articleList);
 
         return responsePage;
+    }
+
+    @Override
+    public ArticleDTO getArticleById(Integer id) {
+        ArticleDTO articleDTO = new ArticleDTO();
+
+        Article article = articleMapper.selectById(id);
+        if (article != null) {
+            BeanUtils.copyProperties(article, articleDTO);
+            Category category = categoryMapper.selectById(article.getCategoryId());
+            if (category != null) {
+                articleDTO.setCategory(category);
+            }
+
+            List<Tag> tags = tagMapper.selectTagsByArticleId(id);
+            if (CollectionUtils.isNotEmpty(tags)) {
+                articleDTO.setTags(tags);
+            }
+        }
+        return articleDTO;
     }
 
 }

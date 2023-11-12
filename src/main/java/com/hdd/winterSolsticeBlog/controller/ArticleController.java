@@ -8,10 +8,7 @@ import com.hdd.winterSolsticeBlog.service.ArticleService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 /**
  * <p>
@@ -27,21 +24,16 @@ import org.springframework.web.bind.annotation.RestController;
 public class ArticleController {
     @Autowired
     private ArticleService articleService;
-//    @ApiImplicitParam(name = "name",value = "姓名",required = true)
-//    @ApiOperation(value = "向客人问好")
-//    @GetMapping("/sayHi")
-//    public ResponseEntity<String> sayHi(@RequestParam(value = "name")String name){
-//        if(true){
-//            String additionalParam = "some additional information";
-//            throw new ArticleException(ErrorMessage.INVALID_INPUT, additionalParam);
-//        }
-//
-//        return ResponseEntity.ok("Hi:"+name);
-//    }
 
     @ApiOperation(value = "分页展示博客列表")
     @PostMapping("page")
     public JsonResult<ResponsePage<ArticleDTO>> getArticlePageList(@RequestBody GetArticlePageListRequest request) {
         return JsonResult.success(articleService.getArticlePageList(request));
+    }
+
+    @ApiOperation(value = "根据ID查询博客文章信息")
+    @GetMapping("/{id}")
+    public JsonResult<ArticleDTO> getArticleById(@PathVariable(name = "id") Integer id) {
+        return JsonResult.success(articleService.getArticleById(id));
     }
 }

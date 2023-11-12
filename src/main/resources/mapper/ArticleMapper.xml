@@ -30,7 +30,7 @@
         SELECT
         a.id,
         a.title,
-        a.content,
+--         a.content,
         a.summary,
         a.category_id,
         c.name AS category_name,
