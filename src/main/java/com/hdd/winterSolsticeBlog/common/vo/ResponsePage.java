@@ -1,73 +1,32 @@
 package com.hdd.winterSolsticeBlog.common.vo;
 
 
-import com.github.pagehelper.PageInfo;
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
+import lombok.Data;
 
 import java.util.List;
 
+
 /**
- * 分页通用返回体
+ * 分页查询结果封装类
  *
- * @param <T>
+ * @param <T> 查询结果的数据类型
  * @author haodedong
  */
+@ApiModel(value = "分页查询结果")
+@Data
 public class ResponsePage<T> {
-    private int page;
-    private int pages;
-    private int size;
-    private long total;
-    private List<T> pageData;
+    @ApiModelProperty(value = "当前页码")
+    private Integer pageNo;
 
-    public ResponsePage(List<T> data) {
-        PageInfo<T> pageInfo = new PageInfo<>(data);
-        this.pages = pageInfo.getPages();
-        this.page = pageInfo.getPageNum();
-        this.size = pageInfo.getPageSize();
-        this.total = pageInfo.getTotal();
-        this.pageData = data;
-    }
+    @ApiModelProperty(value = "每页查询数量")
+    private Integer pageSize;
 
-    public ResponsePage() {
+    @ApiModelProperty(value = "总记录数")
+    private Long totalCount;
 
-    }
+    @ApiModelProperty(value = "查询结果数据")
+    private List<T> data;
 
-    public int getPage() {
-        return page;
-    }
-
-    public void setPage(int page) {
-        this.page = page;
-    }
-
-    public int getPages() {
-        return pages;
-    }
-
-    public void setPages(int pages) {
-        this.pages = pages;
-    }
-
-    public int getSize() {
-        return size;
-    }
-
-    public void setSize(int size) {
-        this.size = size;
-    }
-
-    public long getTotal() {
-        return total;
-    }
-
-    public void setTotal(long total) {
-        this.total = total;
-    }
-
-    public List<T> getPageData() {
-        return pageData;
-    }
-
-    public void setPageData(List<T> data) {
-        this.pageData = data;
-    }
 }

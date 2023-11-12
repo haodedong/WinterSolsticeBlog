@@ -1,5 +1,6 @@
 package com.hdd.winterSolsticeBlog.common.vo;
 
+import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 
 /**
@@ -10,7 +11,8 @@ import lombok.Data;
  **/
 @Data
 public class PageRequest {
-    private Integer pageNo;
-
-    private Integer pageSize;
+    @ApiModelProperty(value = "查询页码")
+    private Integer pageNo = 1;
+    @ApiModelProperty(value = "每页查询数量")
+    private Integer pageSize = 5;
 }

@@ -27,16 +27,23 @@ public class CodeGenerator {
 
         //添加表名称
         List<String> tableList = new ArrayList<>();
-//        tableList.add("my_table_student");
+//        tableList.add("category");
+//        tableList.add("article_category");
 //        tableList.add("my_table_teacher");
 
         String projectPath = System.getProperty("user.dir");
         System.out.println(projectPath);
 
         //数据源配置
-        DataSourceConfig dataSourceConfig = new DataSourceConfig.Builder(url, username, password).build();
+        DataSourceConfig dataSourceConfig = new DataSourceConfig
+                .Builder(url, username, password).build();
+
         //全局配置
-        GlobalConfig globalConfig = new GlobalConfig.Builder().author("haodedong").dateType(DateType.ONLY_DATE).outputDir(projectPath + "/src/main/").build();
+        GlobalConfig globalConfig = new GlobalConfig.Builder()
+                .author("haodedong")
+                .dateType(DateType.TIME_PACK)
+                .outputDir(projectPath + "/src/main/")
+                .build();
         //包配置
         Map<OutputFile, String> map = new HashMap<OutputFile, String>();
         map.put(OutputFile.xml,projectPath+"/src/main/resources/mapper/");

@@ -1,6 +1,6 @@
 package com.hdd.winterSolsticeBlog.service;
 
-import com.hdd.winterSolsticeBlog.entity.User;
+import com.hdd.winterSolsticeBlog.entity.Category;
 import com.baomidou.mybatisplus.extension.service.IService;
 
 /**
@@ -11,6 +11,6 @@ import com.baomidou.mybatisplus.extension.service.IService;
  * @author haodedong
  * @since 2023-11-12
  */
-public interface UserService extends IService<User> {
+public interface CategoryService extends IService<Category> {
 
 }

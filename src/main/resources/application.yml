@@ -13,17 +13,11 @@ spring:
     static-path-pattern: /static/**
 
 
-#mybatis-plus:
-#  # mapper文件地址
-#  mapper-locations: classpath*:com/hdd/winterSolsticeBlog/mapper/**/*.xml
-#  #不想打印 SQL 日志
-#  #configuration:
-#  #   log-impl: org.apache.ibatis.logging.nologging.NoLoggingImpl
-#  global-config:
-#    db-config:
-#      #设置被删除逻辑字段，1标识删除，0标识未删除
-#      logic-delete-field: status
-#      logic-delete-value: 1
-#      logic-not-delete-value: 0
+mybatis-plus:
+  mapper-locations: classpath*:mapper/**/*.xml
+  type-aliases-package: com.hdd.winterSolsticeBlog.entity
+  configuration:
+    map-underscore-to-camel-case: true
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
 
-#debug: true
+debug: true

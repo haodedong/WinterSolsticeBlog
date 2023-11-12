@@ -1,10 +1,13 @@
 package com.hdd.winterSolsticeBlog.dto;
 
+import com.hdd.winterSolsticeBlog.entity.Category;
+import com.hdd.winterSolsticeBlog.entity.Tag;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 
-import java.sql.Timestamp;
+import java.time.LocalDateTime;
+import java.util.List;
 
 /**
  * @Author hdd
@@ -23,12 +26,18 @@ public class ArticleDTO {
     private String content;
 
     @ApiModelProperty(value = "分类")
-    private String category;
+    private Category category;
+
+    @ApiModelProperty(value = "标签列表")
+    private List<Tag> tags;
 
     @ApiModelProperty(value = "作者ID")
     private Integer authorId;
 
     @ApiModelProperty(value = "创建时间")
-    private Timestamp createdAt;
+    private LocalDateTime createdAt;
+
+    @ApiModelProperty(value = "更新时间")
+    private LocalDateTime updatedAt;
 
 }

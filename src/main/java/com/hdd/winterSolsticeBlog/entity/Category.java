@@ -5,7 +5,6 @@ import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import java.io.Serializable;
-import java.time.LocalDateTime;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -19,35 +18,26 @@ import lombok.Setter;
  */
 @Getter
 @Setter
-@TableName("user")
-public class User implements Serializable {
+@TableName("category")
+public class Category implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
+    /**
+     * 分类ID
+     */
     @TableId(value = "id", type = IdType.AUTO)
     private Integer id;
 
     /**
-     * 用户名
+     * 分类名称
      */
-    @TableField("username")
-    private String username;
+    @TableField("name")
+    private String name;
 
     /**
-     * 密码
+     * 分类描述
      */
-    @TableField("password")
-    private String password;
-
-    /**
-     * 邮箱
-     */
-    @TableField("email")
-    private String email;
-
-    /**
-     * 创建时间
-     */
-    @TableField("created_at")
-    private LocalDateTime createdAt;
+    @TableField("description")
+    private String description;
 }

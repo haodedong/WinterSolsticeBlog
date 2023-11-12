@@ -4,10 +4,11 @@ import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
-import java.io.Serializable;
-import java.sql.Timestamp;
 import lombok.Getter;
 import lombok.Setter;
+
+import java.io.Serializable;
+import java.time.LocalDateTime;
 
 /**
  * <p>
@@ -15,7 +16,7 @@ import lombok.Setter;
  * </p>
  *
  * @author haodedong
- * @since 2023-11-11
+ * @since 2023-11-12
  */
 @Getter
 @Setter
@@ -40,10 +41,16 @@ public class Article implements Serializable {
     private String content;
 
     /**
-     * 分类
+     * 博客摘要，如为传递，则中正文中截取开头一段
      */
-    @TableField("category")
-    private String category;
+    @TableField("summary")
+    private String summary;
+
+    /**
+     * 分类ID,一篇文章只允许属于一个分类
+     */
+    @TableField("category_id")
+    private Integer categoryId;
 
     /**
      * 作者ID
@@ -55,5 +62,11 @@ public class Article implements Serializable {
      * 创建时间
      */
     @TableField("created_at")
-    private Timestamp createdAt;
+    private LocalDateTime createdAt;
+
+    /**
+     * 更新时间
+     */
+    @TableField("updated_at")
+    private LocalDateTime updatedAt;
 }

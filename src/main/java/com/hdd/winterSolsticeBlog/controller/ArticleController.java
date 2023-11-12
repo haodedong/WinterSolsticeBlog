@@ -1,12 +1,21 @@
 package com.hdd.winterSolsticeBlog.controller;
 
+import com.hdd.winterSolsticeBlog.common.vo.JsonResult;
+import com.hdd.winterSolsticeBlog.common.vo.ResponsePage;
+import com.hdd.winterSolsticeBlog.dto.ArticleDTO;
+import com.hdd.winterSolsticeBlog.dto.request.GetArticlePageListRequest;
+import com.hdd.winterSolsticeBlog.service.ArticleService;
 import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
  * <p>
- *  前端控制器
+ * 前端控制器
  * </p>
  *
  * @author haodedong
@@ -16,6 +25,8 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/article")
 public class ArticleController {
+    @Autowired
+    private ArticleService articleService;
 //    @ApiImplicitParam(name = "name",value = "姓名",required = true)
 //    @ApiOperation(value = "向客人问好")
 //    @GetMapping("/sayHi")
@@ -28,5 +39,9 @@ public class ArticleController {
 //        return ResponseEntity.ok("Hi:"+name);
 //    }
 
-//    public JsonResult<>
+    @ApiOperation(value = "分页展示博客列表")
+    @PostMapping("page")
+    public JsonResult<ResponsePage<ArticleDTO>> getArticlePageList(@RequestBody GetArticlePageListRequest request) {
+        return JsonResult.success(articleService.getArticlePageList(request));
+    }
 }
