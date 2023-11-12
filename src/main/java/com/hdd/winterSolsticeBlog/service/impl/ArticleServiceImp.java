@@ -43,6 +43,7 @@ public class ArticleServiceImp extends ServiceImpl<ArticleMapper, Article> imple
     @Override
     public ResponsePage<ArticleDTO> getArticlePageList(GetArticlePageListRequest request) {
         PageHelper.startPage(request.getPageNo(), request.getPageSize());
+        // TODO 按时间倒序
         List<ArticleDTO> articleList = articleMapper.selectArticleList(request.getKeyword(),
                 request.getCategoryId(),
                 request.getTagId());
@@ -63,6 +64,10 @@ public class ArticleServiceImp extends ServiceImpl<ArticleMapper, Article> imple
 
         Article article = articleMapper.selectById(id);
         if (article != null) {
+            //TODO 考虑添加wrapper类，用于Article实体对象与ArticleDTO对象之间的属性复制、类的转换，
+            // 可以考虑build模式往DTO中不断的.withTages(xxx).withCategory()
+            // 以及分类和标签是否可以存在于缓存中
+
             BeanUtils.copyProperties(article, articleDTO);
             Category category = categoryMapper.selectById(article.getCategoryId());
             if (category != null) {
