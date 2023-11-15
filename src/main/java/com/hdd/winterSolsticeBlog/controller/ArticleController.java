@@ -8,6 +8,7 @@ import com.hdd.winterSolsticeBlog.service.ArticleService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 /**
@@ -35,5 +36,12 @@ public class ArticleController {
     @GetMapping("/{id}")
     public JsonResult<ArticleDTO> getArticleById(@PathVariable(name = "id") Integer id) {
         return JsonResult.success(articleService.getArticleById(id));
+    }
+
+    @ApiOperation(value = "保持博客文章")
+    @PostMapping("/")
+    public JsonResult<Void> saveArticle(@Validated @RequestBody ArticleDTO request) {
+        articleService.saveOrUpdateArticle(request);
+        return JsonResult.success(null);
     }
 }

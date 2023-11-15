@@ -29,6 +29,11 @@
             <version>2.7.17</version>
         </dependency>
 
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-validation</artifactId>
+        </dependency>
+
         <!--临时使用该分页，其他版本存在循环依赖-->
         <dependency>
             <groupId>com.github.pagehelper</groupId>

@@ -19,4 +19,6 @@ public interface ArticleService extends IService<Article> {
     ResponsePage<ArticleDTO> getArticlePageList(GetArticlePageListRequest request);
 
     ArticleDTO getArticleById(Integer id);
+
+    void saveOrUpdateArticle(ArticleDTO request);
 }

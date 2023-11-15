@@ -6,6 +6,7 @@ import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 
+import javax.validation.constraints.NotEmpty;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -19,6 +20,7 @@ public class ArticleDTO {
     @ApiModelProperty(value = "文章ID")
     private Integer id;
 
+    @NotEmpty(message = "标题不能为空")
     @ApiModelProperty(value = "标题")
     private String title;
 

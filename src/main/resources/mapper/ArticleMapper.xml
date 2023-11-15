@@ -55,6 +55,7 @@
                 AND at.tag_id = #{tagId}
             </if>
         </where>
+        order by a.created_at asc
     </select>
 
 </mapper>
