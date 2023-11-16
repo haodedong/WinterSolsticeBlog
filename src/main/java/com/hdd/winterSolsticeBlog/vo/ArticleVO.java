@@ -1,5 +1,7 @@
-package com.hdd.winterSolsticeBlog.dto;
+package com.hdd.winterSolsticeBlog.vo;
 
+import com.hdd.winterSolsticeBlog.entity.Category;
+import com.hdd.winterSolsticeBlog.entity.Tag;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
@@ -14,7 +16,7 @@ import java.util.List;
  **/
 @ApiModel(description = "文章DTO")
 @Data
-public class ArticleDTO {
+public class ArticleVO {
     @ApiModelProperty(value = "文章ID")
     private Integer id;
 
@@ -28,10 +30,11 @@ public class ArticleDTO {
     @ApiModelProperty(value = "摘要")
     private String summary;
 
-    @ApiModelProperty(value = "分类ID")
-    private Integer categoryId;
-    @ApiModelProperty(value = "标签ID列表")
-    private List<Integer> tagIds;
+    @ApiModelProperty(value = "分类")
+    private Category category;
+
+    @ApiModelProperty(value = "标签列表")
+    private List<Tag> tags;
 
     @ApiModelProperty(value = "作者ID")
     private Integer authorId;

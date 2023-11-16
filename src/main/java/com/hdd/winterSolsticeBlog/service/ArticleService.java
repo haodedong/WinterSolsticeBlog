@@ -5,6 +5,7 @@ import com.hdd.winterSolsticeBlog.common.vo.ResponsePage;
 import com.hdd.winterSolsticeBlog.dto.ArticleDTO;
 import com.hdd.winterSolsticeBlog.dto.request.GetArticlePageListRequest;
 import com.hdd.winterSolsticeBlog.entity.Article;
+import com.hdd.winterSolsticeBlog.vo.ArticleVO;
 
 /**
  * <p>
@@ -16,9 +17,11 @@ import com.hdd.winterSolsticeBlog.entity.Article;
  */
 public interface ArticleService extends IService<Article> {
 
-    ResponsePage<ArticleDTO> getArticlePageList(GetArticlePageListRequest request);
+    ResponsePage<ArticleVO> getArticlePageList(GetArticlePageListRequest request);
 
-    ArticleDTO getArticleById(Integer id);
+    ArticleVO getArticleById(Integer id);
 
     void saveOrUpdateArticle(ArticleDTO request);
+
+    void checkArticleInfo(ArticleDTO request);
 }

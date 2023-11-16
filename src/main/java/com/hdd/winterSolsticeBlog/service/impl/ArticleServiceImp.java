@@ -4,6 +4,7 @@ import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
+import com.hdd.winterSolsticeBlog.common.exception.ArticleException;
 import com.hdd.winterSolsticeBlog.common.vo.ResponsePage;
 import com.hdd.winterSolsticeBlog.dto.ArticleDTO;
 import com.hdd.winterSolsticeBlog.dto.request.GetArticlePageListRequest;
@@ -15,14 +16,19 @@ import com.hdd.winterSolsticeBlog.mapper.ArticleMapper;
 import com.hdd.winterSolsticeBlog.mapper.CategoryMapper;
 import com.hdd.winterSolsticeBlog.mapper.TagMapper;
 import com.hdd.winterSolsticeBlog.service.ArticleService;
+import com.hdd.winterSolsticeBlog.vo.ArticleVO;
 import org.apache.commons.collections4.CollectionUtils;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.stream.Collectors;
+
+import static com.hdd.winterSolsticeBlog.common.exception.ErrorMessage.ARTICLE_CATEGORY_NOT_EXIST;
+import static com.hdd.winterSolsticeBlog.common.exception.ErrorMessage.ARTICLE_TAG_NOT_EXIST;
 
 /**
  * <p>
@@ -48,15 +54,15 @@ public class ArticleServiceImp extends ServiceImpl<ArticleMapper, Article> imple
     private ArticleTagServiceImp articleTagService;
 
     @Override
-    public ResponsePage<ArticleDTO> getArticlePageList(GetArticlePageListRequest request) {
+    public ResponsePage<ArticleVO> getArticlePageList(GetArticlePageListRequest request) {
         PageHelper.startPage(request.getPageNo(), request.getPageSize());
         // TODO 按时间倒序
-        List<ArticleDTO> articleList = articleMapper.selectArticleList(request.getKeyword(),
+        List<ArticleVO> articleList = articleMapper.selectArticleList(request.getKeyword(),
                 request.getCategoryId(),
                 request.getTagId());
-        PageInfo<ArticleDTO> pageInfo = new PageInfo<>(articleList);
+        PageInfo<ArticleVO> pageInfo = new PageInfo<>(articleList);
 
-        ResponsePage<ArticleDTO> responsePage = new ResponsePage<>();
+        ResponsePage<ArticleVO> responsePage = new ResponsePage<>();
         responsePage.setPageNo(pageInfo.getPageNum());
         responsePage.setPageSize(pageInfo.getPageSize());
         responsePage.setTotalCount(pageInfo.getTotal());
@@ -66,8 +72,8 @@ public class ArticleServiceImp extends ServiceImpl<ArticleMapper, Article> imple
     }
 
     @Override
-    public ArticleDTO getArticleById(Integer id) {
-        ArticleDTO articleDTO = new ArticleDTO();
+    public ArticleVO getArticleById(Integer id) {
+        ArticleVO articleVO = new ArticleVO();
 
         Article article = articleMapper.selectById(id);
         if (article != null) {
@@ -75,59 +81,77 @@ public class ArticleServiceImp extends ServiceImpl<ArticleMapper, Article> imple
             // 可以考虑build模式往DTO中不断的.withTages(xxx).withCategory()
             // 以及分类和标签是否可以存在于缓存中
 
-            BeanUtils.copyProperties(article, articleDTO);
+            BeanUtils.copyProperties(article, articleVO);
             Category category = categoryMapper.selectById(article.getCategoryId());
             if (category != null) {
-                articleDTO.setCategory(category);
+                articleVO.setCategory(category);
             }
 
             List<Tag> tags = tagMapper.selectTagsByArticleId(id);
             if (CollectionUtils.isNotEmpty(tags)) {
-                articleDTO.setTags(tags);
+                articleVO.setTags(tags);
             }
         }
-        return articleDTO;
+        return articleVO;
     }
 
     @Transactional
     @Override
     public void saveOrUpdateArticle(ArticleDTO request) {
         Integer id = request.getId();
-
         Article articleEntity = new Article();
         BeanUtils.copyProperties(request, articleEntity);
-        Category category = request.getCategory();
-        if (category != null) {
-            articleEntity.setCategoryId(category.getId());
-        }
-        List<Tag> tags = request.getTags();
+        List<Integer> tagIds = request.getTagIds();
         List<ArticleTag> needInsertArticleTags = null;
-        if (CollectionUtils.isNotEmpty(tags)) {
-            needInsertArticleTags = tags.stream().map(tag -> {
+        if (CollectionUtils.isNotEmpty(tagIds)) {
+            needInsertArticleTags = tagIds.stream().map(tagId -> {
                 ArticleTag articleTag = new ArticleTag();
                 articleTag.setArticleId(articleEntity.getId());
-                articleTag.setTagId(tag.getId());
+                articleTag.setTagId(tagId);
                 return articleTag;
             }).collect(Collectors.toList());
         }
 
-
         if (id == null) {
             // 创建博文
+            articleEntity.setCreatedAt(LocalDateTime.now());
+            articleEntity.setUpdatedAt(LocalDateTime.now());
             articleMapper.insert(articleEntity);
-            if (CollectionUtils.isNotEmpty(needInsertArticleTags)) {
-                articleTagService.batchInsert(needInsertArticleTags);
-            }
         } else {
             // 更新博文
+            articleEntity.setUpdatedAt(LocalDateTime.now());
             articleMapper.updateById(articleEntity);
 
-            if (CollectionUtils.isNotEmpty(needInsertArticleTags)) {
-                LambdaQueryWrapper<ArticleTag> lambdaQueryWrapper = new LambdaQueryWrapper<>();
-                lambdaQueryWrapper.eq(ArticleTag::getArticleId, request.getId());
-                articleTagService.remove(lambdaQueryWrapper);
-                articleTagService.batchInsert(needInsertArticleTags);
+            LambdaQueryWrapper<ArticleTag> lambdaQueryWrapper = new LambdaQueryWrapper<>();
+            lambdaQueryWrapper.eq(ArticleTag::getArticleId, request.getId());
+            articleTagService.remove(lambdaQueryWrapper);
+        }
+        if (CollectionUtils.isNotEmpty(needInsertArticleTags)) {
+            articleTagService.batchInsert(needInsertArticleTags);
+        }
+    }
+
+    @Override
+    public void checkArticleInfo(ArticleDTO request) {
+        Integer categoryId = request.getCategoryId();
+        if (categoryId != null) {
+            LambdaQueryWrapper<Category> categoryLambdaQueryWrapper = new LambdaQueryWrapper<>();
+            categoryLambdaQueryWrapper.eq(Category::getId, categoryId);
+            Long categoryCount = categoryMapper.selectCount(categoryLambdaQueryWrapper);
+            if (categoryCount == null || categoryCount != 1) {
+                throw new ArticleException(ARTICLE_CATEGORY_NOT_EXIST, String.valueOf(categoryId));
             }
+
+            List<Integer> tagIds = request.getTagIds();
+            if (CollectionUtils.isNotEmpty(tagIds)) {
+                LambdaQueryWrapper<Tag> tagLambdaQueryWrapper = new LambdaQueryWrapper<>();
+                tagLambdaQueryWrapper.in(Tag::getId, tagIds);
+                Long tagCount = tagMapper.selectCount(tagLambdaQueryWrapper);
+                if (tagCount == null || tagCount != tagIds.size()) {
+                    throw new ArticleException(ARTICLE_TAG_NOT_EXIST, tagIds.toString());//TODO gson
+                }
+            }
+
         }
     }
 

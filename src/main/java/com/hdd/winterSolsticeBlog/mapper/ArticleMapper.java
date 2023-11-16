@@ -1,8 +1,8 @@
 package com.hdd.winterSolsticeBlog.mapper;
 
-import com.hdd.winterSolsticeBlog.dto.ArticleDTO;
-import com.hdd.winterSolsticeBlog.entity.Article;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import com.hdd.winterSolsticeBlog.entity.Article;
+import com.hdd.winterSolsticeBlog.vo.ArticleVO;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;
@@ -18,5 +18,5 @@ import java.util.List;
 @Mapper
 public interface ArticleMapper extends BaseMapper<Article> {
 
-    List<ArticleDTO> selectArticleList(String keyword, Integer categoryId, Integer tagId);
+    List<ArticleVO> selectArticleList(String keyword, Integer categoryId, Integer tagId);
 }

@@ -14,15 +14,17 @@
         <result column="updated_at" property="updatedAt" />
     </resultMap>
 
-    <resultMap id="articleResultMap" type="com.hdd.winterSolsticeBlog.dto.ArticleDTO">
-        <id property="id" column="id" />
-        <result property="title" column="title" />
-        <result property="content" column="content" />
-        <result property="authorId" column="author_id" />
-        <result property="createdAt" column="created_at" />
-        <result property="updatedAt" column="updated_at" />
-        <association property="category" column="category_id" javaType="com.hdd.winterSolsticeBlog.entity.Category" select="com.hdd.winterSolsticeBlog.mapper.CategoryMapper.selectById" />
-        <collection property="tags" column="id" ofType="com.hdd.winterSolsticeBlog.entity.Tag" select="com.hdd.winterSolsticeBlog.mapper.TagMapper.selectTagsByArticleId" />
+    <resultMap id="articleResultMap" type="com.hdd.winterSolsticeBlog.vo.ArticleVO">
+        <id property="id" column="id"/>
+        <result property="title" column="title"/>
+        <result property="content" column="content"/>
+        <result property="authorId" column="author_id"/>
+        <result property="createdAt" column="created_at"/>
+        <result property="updatedAt" column="updated_at"/>
+        <association property="category" column="category_id" javaType="com.hdd.winterSolsticeBlog.entity.Category"
+                     select="com.hdd.winterSolsticeBlog.mapper.CategoryMapper.selectById"/>
+        <collection property="tags" column="id" ofType="com.hdd.winterSolsticeBlog.entity.Tag"
+                    select="com.hdd.winterSolsticeBlog.mapper.TagMapper.selectTagsByArticleId"/>
 
     </resultMap>
 
