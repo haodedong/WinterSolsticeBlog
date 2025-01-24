@@ -3,10 +3,18 @@ server:
 
 spring:
   datasource:
-    driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://localhost:3306/blog?serverTimezone=GMT%2B8
-    username: root
-    password: IsuffUd89
+    driver-class-name: org.postgresql.Driver
+    url: jdbc:postgresql://10.4.126.94:5432/hdd
+    username: aclome
+    password: Aaa123+-*/
+
+
+
+
+
+
+  # 如果使用的是Spring Security的自定义配置类，可以在下面添加bean定义
+  # 或者直接在Java配置类中配置
 
 ## fix:knife4j文档页面，报404
   mvc:

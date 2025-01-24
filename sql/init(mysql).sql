@@ -1,4 +1,4 @@
-create table if not exists blog.article
+create table if not exists article
 (
     id          int auto_increment
     primary key,
@@ -12,7 +12,7 @@ create table if not exists blog.article
     )
     comment '博客文章表';
 
-create table if not exists blog.article_tag
+create table if not exists article_tag
 (
     id         int auto_increment
     primary key,
@@ -23,7 +23,7 @@ create table if not exists blog.article_tag
     )
     comment '文章与标签关联关系表';
 
-create table if not exists blog.category
+create table if not exists category
 (
     id          int auto_increment comment '分类ID'
     primary key,
@@ -32,7 +32,7 @@ create table if not exists blog.category
     )
     comment '博客分类表';
 
-create table if not exists blog.comment
+create table if not exists comment
 (
     id         int auto_increment
     primary key,
@@ -43,7 +43,7 @@ create table if not exists blog.comment
 )
     comment '博客评论表';
 
-create table if not exists blog.tag
+create table if not exists tag
 (
     id       int auto_increment
     primary key,
@@ -53,7 +53,7 @@ create table if not exists blog.tag
     )
     comment '博客标签表';
 
-create table if not exists blog.user
+create table if not exists user
 (
     id         int auto_increment
     primary key,
