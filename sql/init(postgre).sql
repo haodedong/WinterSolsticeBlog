@@ -75,7 +75,7 @@ create table if not exists tag
 comment on table tag is '博客标签表';
 comment on column tag.tag_name is '标签名称';
 
-create table if not exists "user"
+create table if not exists "blog_user"
 (
     id         serial
     primary key,
@@ -85,8 +85,8 @@ create table if not exists "user"
     created_at timestamp default CURRENT_TIMESTAMP null
     );
 
-comment on table "user" is '用户表';
-comment on column "user".username is '用户名';
-comment on column "user".password is '密码';
-comment on column "user".email is '邮箱';
-comment on column "user".created_at is '创建时间';
+comment on table "blog_user" is '用户表';
+comment on column "blog_user".username is '用户名';
+comment on column "blog_user".password is '密码';
+comment on column "blog_user".email is '邮箱';
+comment on column "blog_user".created_at is '创建时间';

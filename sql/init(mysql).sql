@@ -53,7 +53,7 @@ create table if not exists tag
     )
     comment '博客标签表';
 
-create table if not exists user
+create table if not exists blog_user
 (
     id         int auto_increment
     primary key,

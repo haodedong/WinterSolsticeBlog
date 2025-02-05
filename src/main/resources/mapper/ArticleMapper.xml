@@ -42,10 +42,10 @@
         a.created_at,
         a.updated_at
         FROM
-        blog.article a
-        LEFT JOIN blog.category c ON a.category_id = c.id
-        LEFT JOIN blog.article_tag at ON a.id = at.article_id
-        LEFT JOIN blog.tag t ON at.tag_id = t.id
+        article a
+        LEFT JOIN category c ON a.category_id = c.id
+        LEFT JOIN article_tag at ON a.id = at.article_id
+        LEFT JOIN tag t ON at.tag_id = t.id
         <where>
             <if test="keyword != null and keyword != ''">
                 AND a.content LIKE CONCAT('%', #{keyword}, '%')

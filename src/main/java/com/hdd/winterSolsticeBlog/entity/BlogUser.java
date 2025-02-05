@@ -19,8 +19,8 @@ import lombok.Setter;
  */
 @Getter
 @Setter
-@TableName("user")
-public class User implements Serializable {
+@TableName("blog_user")
+public class BlogUser implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
@@ -42,8 +42,8 @@ public class User implements Serializable {
     /**
      * 邮箱
      */
-    @TableField("email")
-    private String email;
+    @TableField("blog_email")
+    private String blogEmail;
 
     /**
      * 创建时间
